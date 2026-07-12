@@ -4,44 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS</title>
+    <title>LMSZone | Learn, Build, Grow</title>
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>
-    <nav class="navBar">
-        <ul class="navbar">
-            <div class="name">LMSZone</div>
-            <li>Home</li>
-            <li class="courses">Courses</li>
-            <li>Become Instructor</li>
-            <li>About</li>
-            <li>Conatct</li>
-            <li class="Login"><a href="/register">Login</a></li>
-            <img src="https://img.icons8.com/?size=100&id=7695&format=png&color=FFFFFF" alt="search" class="searchIcon">
-        </ul>
-    </nav>
-
-    <div class="page1">
-        <p class="line1">Learn New Skills</p>
-        <p class="line2">Build Your Future</p>
-        <p class="line3">We are building a community of makers helping each other create apps, websites , and automation
-            without a single line of code</p>
-        <button class="btn btn1">Join us on Discord</button>
-    </div>
-
-    <div class="page2">
-        <p class="line4">We are creating a powerful community of builders who believe that anyone can</p>
-        <p class="line5">create a powerful products without writing a single line of code</p>
-        <div class="cards">
-            <div class="card card1"></div>
-            <div class="card card2"></div>
-            <div class="card card3"></div>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="/">LMSZone</a>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#community">Community</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a class="btn btn-outline" href="/register">Login</a>
         </div>
-        <button class="btn btn2">Join our community</button>
-    </div>
 
-    
+        <div class="hero container" id="home">
+            <div class="hero-copy">
+                <span class="eyebrow">Learn without limits</span>
+                <h1>Master new skills, build your future, and launch your career.</h1>
+                <p class="hero-text">Join a community of creators who are building apps, websites, and automation with guided courses, mentorship, and real-world projects.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="/register">Get started</a>
+                    <a class="btn btn-light" href="#courses">Browse courses</a>
+                </div>
+                <div class="hero-meta">
+                    <div><strong>20K+</strong> learners</div>
+                    <div><strong>150+</strong> courses</div>
+                    <div><strong>100%</strong> online</div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="feature-card">
+                    <span class="card-label">Featured path</span>
+                    <h2>Launch your first web app</h2>
+                    <p>Follow hands-on lessons designed to help you ship something real in weeks.</p>
+                    <a class="card-link" href="#courses">View curriculum</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section section-features" id="courses">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">What you can learn</span>
+                    <h2>Courses built for beginners, creators, and future founders.</h2>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card feature-card-alt">
+                        <h3>Web Development</h3>
+                        <p>Build websites, user interfaces, and full-stack projects with practical lessons.</p>
+                    </article>
+                    <article class="feature-card feature-card-alt">
+                        <h3>Product Design</h3>
+                        <p>Create polished interfaces, prototypes, and customer-ready landing pages.</p>
+                    </article>
+                    <article class="feature-card feature-card-alt">
+                        <h3>Automation</h3>
+                        <p>Use no-code tools and scripting to automate workflows and save time.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-community" id="community">
+            <div class="container community-grid">
+                <div>
+                    <span class="section-label">Community</span>
+                    <h2>Learn together, share progress, and stay motivated.</h2>
+                    <p>Join active study rooms, collaborate on projects, and get feedback from instructors and peers.</p>
+                    <a class="btn btn-primary" href="/register">Join our community</a>
+                </div>
+                <div class="community-card">
+                    <div class="community-stat">
+                        <strong>250+</strong>
+                        <span>study sessions</span>
+                    </div>
+                    <div class="community-stat">
+                        <strong>98%</strong>
+                        <span>course completion</span>
+                    </div>
+                    <div class="community-stat">
+                        <strong>4.9/5</strong>
+                        <span>average rating</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+        <div class="container footer-inner">
+            <p>© 2026 LMSZone. Learn, build, and grow.</p>
+            <nav class="footer-nav">
+                <a href="#home">Home</a>
+                <a href="#courses">Courses</a>
+                <a href="#community">Community</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </footer>
 </body>
 
 </html>
