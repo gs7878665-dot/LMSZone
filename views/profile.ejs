@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMSZone - Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body class="pbody">
+
+    <!-- Sidebar Navigation Layout -->
+    <div class="sidebar">
+        <h2 class="pname">LMSZone</h2>
+        <nav>
+            <ul>
+                <li class="item active">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-icon">
+                        <rect x="3" y="3" width="7" height="9"></rect>
+                        <rect x="14" y="3" width="7" height="5"></rect>
+                        <rect x="14" y="12" width="7" height="9"></rect>
+                        <rect x="3" y="16" width="7" height="5"></rect>
+                    </svg>
+                    Dashboard
+                </li>
+                <li class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-icon">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    My Schedule
+                </li>
+                <li class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-icon">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Assignments
+                </li>
+                <li class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-icon">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    My Courses
+                </li>
+                <li class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-icon">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    My Tasks
+                </li>
+                <li class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-icon">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                    Fees
+                </li>
+                <li class="item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sidebar-icon">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    My Account
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Top Navigation Bar Layout -->
+    <nav class="topbar">
+        <div class="topbar-left">
+            <span>Hello <span class="user-greeting-name">
+                    <%= user && user.username ? user.username : 'Guest' %>
+                </span></span>
+        </div>
+        <div class="topbar-right">
+            <div class="search-container">
+                <input class="search" placeholder="Search" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <a href="#" class="nav-notification"><img src="https://img.icons8.com/?size=100&id=83193&format=png&color=FFFFFF" style="width:34px; margin:20px 0px;"></a>
+            <button class="nav-profile-btn"><span class="user-greeting-name">
+                    <%= user && user.username ? user.username : 'Guest' %>
+                </span> Profile</button>
+        </div>
+    </nav>
+
+    <!-- MAIN PAGE WRAPPERS -->
+
+    <!-- 1. DASHBOARD PAGE LAYOUT -->
+    <div class="dashboard page">
+        <h2 class="page-title">Your overview</h2>
+
+        <!-- Overview Stats layout -->
+        <div class="overview-cards">
+            <div class="overview-card">
+                <div class="card-icon-wrapper purple-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#a855f7"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <p class="card-label">Total Courses</p>
+                    <h3 class="card-value"> <%= courses.length %></h3>
+                    
+                </div>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon-wrapper blue-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#3b82f6"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <p class="card-label">Pending Assignments</p>
+                    <h3 class="card-value"><%= assignments.length %></h3>
+                    <p class="card-subtext">Need your attention</p>
+                </div>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon-wrapper orange-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#f97316"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <p class="card-label">Upcoming Events</p>
+                    <h3 class="card-value"><!-- Inject upcoming events count here --></h3>
+                    <p class="card-subtext">This week</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Progress Section Layout -->
+            <div class="progress-section dashboard-card">
+                <h3 class="section-subtitle">Progress Overview</h3>
+                <div class="progress-container">
+                    <div class="circular-progress">
+                        <svg class="progress-svg" viewBox="0 0 100 100">
+                            <circle class="bg-circle" cx="50" cy="50" r="40"></circle>
+                            <circle class="fg-circle completed" cx="50" cy="50" r="40"
+                                style="stroke-dasharray: 251.2; stroke-dashoffset: 62.8;"></circle>
+                        </svg>
+                        <div class="progress-text-center">
+                            <span class="pct">
+                                <%= sp && ((sp.attendedClasses / sp.totalClasses)*100) %> %
+                            </span>
+                            <span class="lbl">Total Attendence</span>
+                        </div>
+                    </div>
+                    <ul class="progress-legend">
+                        <li>
+                            <span class="dot purple"></span>
+                            <span class="legend-text">Total Classes</span>
+                            <span class="legend-val">
+                                <%= sp && sp.totalClasses %>
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="dot red"></span>
+                            <span class="legend-text">Classes Attended</span>
+                            <span class="legend-val">
+                                <%= sp && sp.attendedClasses %>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Upcoming Classes Section Layout -->
+            <div class="upcoming-section dashboard-card">
+                <div class="section-header-inline">
+                    <h3 class="section-subtitle">Upcoming Classes</h3>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+                <div class="classes-list">
+                    <!-- EJS LOOP: Loop through upcoming classes -->
+                    
+                    <div class="class-item">
+                        <div class="class-indicator purple"></div>
+                        <div class="class-details">
+                            <h4 class="class-name"><%= schedule && schedule[0].subject  %></h4>
+                            <p class="class-time"><%= schedule && schedule[0].startTime %></p>
+                        </div>
+                    </div> 
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. MY SCHEDULE PAGE LAYOUT -->
+    <div class="schedule page" style="display: none;">
+        <h2 class="page-title">My Schedule</h2>
+        <div class="calendar-wrapper">
+            <div class="calendar-header">
+                <div class="calendar-nav">
+                    <button class="cal-nav-btn">&lt;&lt;</button>
+                    <span class="cal-current-date">Date</span>
+                    <button class="cal-nav-btn">&gt;</button>
+                </div>
+                <button class="today-btn">Today</button>
+            </div>
+            <div class="calendar-grid">
+                <!-- Row headers (days) -->
+                <div class="grid-header" style="grid-column: 1; grid-row: 1;">Time</div>
+                <div class="grid-header" style="grid-column: 2; grid-row: 1;">Monday</div>
+                <div class="grid-header" style="grid-column: 3; grid-row: 1;">Tuesday</div>
+                <div class="grid-header" style="grid-column: 4; grid-row: 1;">Wednesday</div>
+                <div class="grid-header" style="grid-column: 5; grid-row: 1;">Thursday</div>
+                <div class="grid-header" style="grid-column: 6; grid-row: 1;">Friday</div>
+                <div class="grid-header" style="grid-column: 7; grid-row: 1;">Saturday</div>
+                <% 
+                    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    const times = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"];
+                    const dayToCol = { monday: 2, tuesday: 3, wednesday: 4, thursday: 5, friday: 6, saturday: 7 };
+
+                    function timeToRow(timeStr) {
+                        if (!timeStr) return null;
+                        const clean = timeStr.trim().toUpperCase();
+                        const match = clean.match(/^(\d+):(\d+)\s*(AM|PM)?$/);
+                        if (!match) return null;
+                        let hours = parseInt(match[1], 10);
+                        const minutes = parseInt(match[2], 10);
+                        const ampm = match[3];
+                        if (ampm === "PM" && hours < 12) {
+                            hours += 12;
+                        } else if (ampm === "AM" && hours === 12) {
+                            hours = 0;
+                        }
+                        const totalHours = hours + minutes / 60;
+                        return Math.round(totalHours - 9) + 2;
+                    }
+
+                    function getSubjectColorClass(subject) {
+                        if (!subject) return "";
+                        const sub = subject.toLowerCase();
+                        if (sub.includes("ds") || sub.includes("data structure")) return "ds-color";
+                        if (sub.includes("dbms") || sub.includes("database")) return "dbms-color";
+                        if (sub.includes("algo") || sub.includes("algorithm")) return "algo-color";
+                        if (sub.includes("cn") || sub.includes("network")) return "cn-color";
+                        if (sub.includes("os") || sub.includes("operating system")) return "os-color";
+                        return "ds-color";
+                    }
+
+                    times.forEach(function(time, timeIdx) {
+                        const row = timeIdx + 2;
+                %>
+                        <div class="time-label" style="grid-column: 1; grid-row: <%= row %>;">
+                            <%= time %>
+                        </div>
+                        <% for (let col = 2; col <= 7; col++) { %>
+                            <div class="grid-cell" style="grid-column: <%= col %>; grid-row: <%= row %>;"></div>
+                        <% } %>
+                <% }); %>
+
+                <% if (schedule && schedule.length) {
+                    const studentSchedule = schedule.filter(function(item) {
+                        return !sp || !item.studentId || item.studentId.toString() === sp._id.toString();
+                    });
+                    studentSchedule.forEach(function(item) {
+                        if (!item.day || !item.startTime) return;
+                        const col = dayToCol[item.day.trim().toLowerCase()];
+                        const startRow = timeToRow(item.startTime);
+                        if (!col || !startRow) return;
+                        let endRow = timeToRow(item.endTime);
+                        if (!endRow || endRow <= startRow) {
+                            endRow = startRow + 1;
+                        }
+                        const finalEndRow = Math.min(endRow, 10);
+                        const finalStartRow = Math.min(startRow, 9);
+                        if (finalStartRow >= finalEndRow) return;
+                %>
+                        <div class="schedule-block <%= getSubjectColorClass(item.subject) %>"
+                            style="grid-column: <%= col %>; grid-row: <%= finalStartRow %> / <%= finalEndRow %>; z-index: 2;">
+                            <div class="block-title <%= item.subject.length > 15 ? 'font-smaller' : '' %>">
+                                <%= item.subject %>
+                            </div>
+                            <div class="block-room">
+                                <%= item.room || "" %>
+                            </div>
+                        </div>
+                <% }); } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ASSIGNMENTS PAGE LAYOUT -->
+    <div class="assignments page" style="display: none;">
+        <h2 class="page-title">Assignments</h2>
+        <div class="filter-tabs-wrapper">
+            <div class="filter-tabs" id="assignmentTabs">
+                <button class="filter-tab active-tab">All</button>
+                <button class="filter-tab ">Pending</button>
+                <button class="filter-tab">Submitted</button>
+                <button class="filter-tab">Graded</button>
+            </div>
+        </div>
+        <div class="assignments-list">
+            <% if (assignments && assignments.length) { %>
+                <% assignments.forEach(function(assignment) { %>
+                    <div class="assignment-card flex-between" data-status="<%= assignment.status || 'Pending' %>">
+                        <div class="assignment-details-left">
+                            <div
+                                class="assignment-icon-label <%= assignment.status === 'Submitted' ? 'green-bg' : assignment.status === 'Graded' ? 'blue-bg' : 'purple-bg' %>">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="card-icon">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                </svg>
+                            </div>
+                            <div class="assignment-text">
+                                <h4 class="assignment-title">
+                                    <%= assignment.title %>
+                                </h4>
+                                <p class="assignment-desc">
+                                    <%= assignment.description %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="assignment-details-right text-right">
+                            <p class="due-date">Due: <%= assignment.deadline ? new
+                                    Date(assignment.deadline).toLocaleDateString('en-GB') : 'No deadline' %>
+                            </p>
+                            <span
+                                class="status-badge <%= assignment.status ? assignment.status.toLowerCase() : 'pending' %>">
+                                <%= assignment.status || 'Pending' %>
+                            </span>
+                        </div>
+                    </div>
+                    <% }); %>
+                        <% } else { %>
+                            <p class="showing-text">No assignments yet.</p>
+                            <% } %>
+        </div>
+        <p class="showing-text" id="assignmentsCount"><!-- Showing count information --></p>
+    </div>
+
+    <!-- 4. MY COURSES PAGE LAYOUT -->
+    <div class="courses page" style="display: none;">
+        <div class="section-header-inline margin-bottom-20">
+            <h2 class="page-title margin-0">My Courses</h2>
+            <a href="#" class="view-all-link">View All</a>
+        </div>
+        <div class="courses-grid">
+            <% courses && courses.forEach (function(element){%>
+                <div class="courses-element">
+                    <li>
+                        <%= element.courseName %>
+                    </li>
+                    <li>
+                        <%= element.courseCode %>
+                    </li>
+                    <li>
+                        <%= element.credit %>
+                    </li>
+                </div>
+                <br>
+                <% }); %>
+        </div>
+    </div>
+
+    <!-- 5. MY TASKS PAGE LAYOUT -->
+    <div class="tasks page" style="display: none;">
+        <h2 class="page-title">My Tasks</h2>
+        <div class="filter-tabs-wrapper">
+            <div class="filter-tabs" id="taskTabs">
+                <button class="filter-tab active-tab">To Do</button>
+                <button class="filter-tab">In Progress</button>
+                <button class="filter-tab">Completed</button>
+            </div>
+        </div>
+        <div class="tasks-list">
+            <% if (tasks && tasks.length) { %>
+                <% tasks.forEach(function(task) { %>
+                    <div class="task-card flex-between" data-status="<%= task.completed ? 'Completed' : 'To Do' %>">
+                        <div class="task-left">
+                            <div class="task-info">
+                                <h4 class="task-title">
+                                    <%= task.title %>
+                                </h4>
+                                <p class="task-course">
+                                    <%= task.deadline ? ('Due ' + new Date(task.deadline).toLocaleDateString('en-GB')) : 'No deadline' %>
+                                </p>
+                            </div>
+                        </div>
+                        <span class="task-badge">
+                            <%= task.completed ? 'Completed' : 'To Do' %>
+                        </span>
+                    </div>
+                    <% }); %>
+                        <% } else { %>
+                            <p class="showing-text">No tasks yet. Add one using the button.</p>
+                            <% } %>
+        </div>
+        <button class="primary-btn add-task-btn" id="addTaskButton" type="button">Add Task</button>
+        <p class="showing-text" id="tasksCount"><!-- Showing count information --></p>
+    </div>
+
+    <div class="modal-overlay" id="taskFormModal" style="display: none;">
+        <div class="modal-content task-modal-content">
+            <button type="button" class="modal-close-btn" id="closeTaskForm">&times;</button>
+            <h3 class="section-subtitle">Create New Task</h3>
+            <form action="/tasks" method="POST" class="task-create-form">
+                <div class="form-group-row">
+                    <label for="taskTitle" class="form-label">Task Title</label>
+                    <input type="text" id="taskTitle" name="title" class="form-input" placeholder="Enter task title"
+                        required>
+                </div>
+                <div class="form-group-row">
+                    <label for="taskDeadline" class="form-label">Deadline</label>
+                    <input type="date" id="taskDeadline" name="deadline" class="form-input">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="save-changes-btn">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 6. FEES PAGE LAYOUT -->
+    <div class="fees page" style="display: none;">
+        <h2 class="page-title">Fees Overview</h2>
+
+        <!-- Summary Cards layout -->
+        <div class="overview-cards">
+            <div class="overview-card">
+                <div class="card-icon-wrapper purple-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#a855f7"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <p class="card-label">Total Fees</p>
+                    <h3 class="card-value">
+                        <%= sp.totalFees %>
+                    </h3>
+                </div>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon-wrapper green-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#4ade80"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <p class="card-label">Paid Amount</p>
+                    <h3 class="card-value">
+                        <%= sp.paidFees %>
+                    </h3>
+                </div>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon-wrapper orange-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#f97316"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <p class="card-label">Due Amount</p>
+                    <h3 class="card-value">
+                        <%= sp.totalFees - sp.paidFees %>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment History Table Layout -->
+        <div class="fees-table-card">
+            <h3 class="section-subtitle">Payment History</h3>
+            <table class="fees-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- EJS LOOP: Loop through transaction rows -->
+                    <!-- 
+                    <tr>
+                        <td>Date Value</td>
+                        <td>Description Value</td>
+                        <td>&#8377; Amount Value</td>
+                        <td><span class="status-paid">Paid</span></td>
+                    </tr> 
+                    -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 7. MY ACCOUNT PAGE & EDIT PROFILE SUB-VIEW LAYOUT -->
+    <div class="account page" style="display: none;">
+
+        <!-- View details mode container -->
+        <div id="viewAccountSection">
+            <h2 class="page-title">My Account</h2>
+            <div class="account-grid">
+                <!-- Left panel profile block layout -->
+                <div class="profile-summary-card">
+                    <div class="avatar-circle">
+                        <span class="avatar-letter">G</span>
+                        <img src="" class="avatar-img" style="display: none;" id="viewAvatarImg" alt="Profile avatar">
+                    </div>
+                    <h3 class="profile-sum-name" id="viewName">
+                        <%=users.username%>
+                    </h3>
+                    <p class="profile-sum-role"><!-- User role (e.g. Student) --></p>
+                    <p class="profile-sum-dept" id="viewDeptAndYear"><!-- Department & Year --></p>
+                    <button class="edit-profile-btn" id="toEditBtn">Edit Profile</button>
+                </div>
+
+                <!-- Right panel info table layout -->
+                <div class="account-details-card">
+                    <div class="details-row">
+                        <span class="detail-label">Full Name</span>
+                        <span class="detail-value" id="lblFullName">
+                            <%= user && user.username %>
+                        </span>
+                    </div>
+                    <div class="details-row">
+                        <span class="detail-label">Username</span>
+                        <span class="detail-value" id="lblUsername"><!-- Generated/Queried Username --></span>
+                    </div>
+                    <div class="details-row">
+                        <span class="detail-label">Email</span>
+                        <span class="detail-value" id="lblEmail">
+                            <%=user && user.email%>
+                        </span>
+                    </div>
+                    <div class="details-row">
+                        <span class="detail-label">Phone</span>
+                        <span class="detail-value" id="lblPhone">
+                            <%= sp.phone %>
+                        </span>
+                    </div>
+                    <div class="details-row">
+                        <span class="detail-label">Department</span>
+                        <span class="detail-value" id="lblDept">
+                            <%= sp.branch %>
+                        </span>
+                    </div>
+                    <div class="details-row">
+                        <span class="detail-label">Semester</span>
+                        <span class="detail-value" id="lblYear">
+                            <%= sp.semester %>
+                        </span>
+                    </div>
+                    <div class="details-row">
+                        <span class="detail-label">Student ID</span>
+                        <span class="detail-value">
+                            <%= sp.rollNumber %>
+                        </span>
+                    </div>
+                    <div class="details-row">
+                        <span class="detail-label">Section</span>
+                        <span class="detail-value">
+                            <%= sp.section %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Profile form mode container -->
+        <div id="editAccountSection" style="display: none;">
+            <h2 class="page-title">Profile</h2>
+            <div class="account-grid">
+                <!-- Left panel change photo layout -->
+                <div class="profile-summary-card">
+                    <div class="avatar-circle">
+                        <span class="avatar-letter">G</span>
+                        <img src="" class="avatar-img" style="display: none;" id="editAvatarImg" alt="Profile avatar">
+                    </div>
+                    <button class="change-photo-btn" id="openUploadBtn">Change Photo</button>
+                </div>
+
+                <!-- Right panel form fields layout -->
+                <div class="account-details-card">
+                    <form id="editProfileForm">
+                        <div class="form-group-row">
+                            <label for="inputFullName" class="form-label">Full Name</label>
+                            <input type="text" id="inputFullName" class="form-input"
+                                value="<%= user && user.username ? user.username : 'Guest' %>">
+                        </div>
+                        <div class="form-group-row">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" id="inputEmail" class="form-input" value="<%=users.email%>">
+                        </div>
+                        <div class="form-group-row">
+                            <label for="inputPhone" class="form-label">Phone</label>
+                            <input type="text" id="inputPhone" class="form-input" value="">
+                        </div>
+                        <div class="form-group-row">
+                            <label for="inputDept" class="form-label">Department</label>
+                            <input type="text" id="inputDept" class="form-input" value="">
+                        </div>
+                        <div class="form-group-row">
+                            <label for="inputYear" class="form-label">Year</label>
+                            <input type="text" id="inputYear" class="form-input" value="">
+                        </div>
+                        <div class="form-group-row flex-start">
+                            <label for="inputBio" class="form-label">Bio</label>
+                            <textarea id="inputBio" class="form-input text-area" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="save-changes-btn">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. UPLOAD PROFILE PICTURE MODAL LAYOUT -->
+    <div class="modal-overlay" id="uploadModal" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeUploadBtn">&times;</button>
+            <div class="upload-dropzone" id="dropzone">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#718096"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <h4 class="upload-title">Upload Profile Picture</h4>
+                <p class="upload-subtext">JPG, PNG up to 2MB</p>
+                <input type="file" id="fileInput" accept="image/png, image/jpeg" style="display: none;">
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/js/index.js"></script>
+</body>
+
+</html>
