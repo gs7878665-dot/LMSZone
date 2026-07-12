@@ -47,6 +47,7 @@ const studentProfileSchema = mongoose.Schema({
 
   phone: String,
   avatar: String,
+  bio: String,
 
   totalClasses: {
     type: Number,
@@ -229,8 +230,20 @@ app.get("/logout", (req, res, next) => {
 
 app.get("/profile", isloggedIn, async (req, res) => {
   try {
-    const sp = await StudentProfile.findOne({ userId: req.user._id });
-    const studentId = sp ? sp._id : null;
+    let sp = await StudentProfile.findOne({ userId: req.user._id });
+    if (!sp) {
+      sp = await StudentProfile.create({
+        userId: req.user._id,
+        rollNumber: "S" + Math.floor(100000 + Math.random() * 900000),
+        branch: "Computer Science",
+        semester: 1,
+        section: "A",
+        phone: "",
+        avatar: "",
+        bio: ""
+      });
+    }
+    const studentId = sp._id;
     const [users, courses, sc, assignments, schedule, tasks] = await Promise.all([
       user.find({}),
       course.find({}),
@@ -254,6 +267,90 @@ app.get("/profile", isloggedIn, async (req, res) => {
     console.log("No error");
   } catch (err) {
     console.log("Error found ", err);
+    res.status(500).send("An error occurred loading the profile.");
+  }
+});
+
+app.post("/profile/edit", isloggedIn, async (req, res) => {
+  try {
+    const { username, email, phone, branch, semester, bio, avatar } = req.body;
+    
+    // Update user info
+    await user.findByIdAndUpdate(req.user._id, { username, email });
+    
+    // Update profile info
+    let sp = await StudentProfile.findOne({ userId: req.user._id });
+    if (!sp) {
+      sp = new StudentProfile({ userId: req.user._id });
+    }
+    sp.phone = phone;
+    sp.branch = branch;
+    sp.semester = Number(semester) || 1;
+    sp.bio = bio;
+    if (avatar) {
+      sp.avatar = avatar;
+    }
+    await sp.save();
+    
+    res.redirect("/profile");
+  } catch (err) {
+    console.log("Error updating profile:", err);
+    res.redirect("/profile");
+  }
+});
+
+app.post("/assignments", isloggedIn, async (req, res) => {
+  try {
+    const sp = await StudentProfile.findOne({ userId: req.user._id });
+    if (!sp) {
+      return res.redirect("/profile");
+    }
+    
+    const { title, description, courseId, deadline, status } = req.body;
+    
+    await Assignment.create({
+      studentId: sp._id,
+      courseId: mongoose.Types.ObjectId.isValid(courseId) ? courseId : null,
+      title: title || "Untitled Assignment",
+      description: description || "",
+      deadline: deadline ? new Date(deadline) : null,
+      status: status || "Pending"
+    });
+    
+    res.redirect("/profile");
+  } catch (err) {
+    console.log("Error creating assignment:", err);
+    res.redirect("/profile");
+  }
+});
+
+app.post("/assignments/update", isloggedIn, async (req, res) => {
+  try {
+    const { id, title, description, courseId, deadline, status } = req.body;
+    
+    const updateData = {
+      title: title || "Untitled Assignment",
+      description: description || "",
+      courseId: mongoose.Types.ObjectId.isValid(courseId) ? courseId : null,
+      deadline: deadline ? new Date(deadline) : null,
+      status: status || "Pending"
+    };
+    
+    await Assignment.findByIdAndUpdate(id, updateData);
+    res.redirect("/profile");
+  } catch (err) {
+    console.log("Error updating assignment:", err);
+    res.redirect("/profile");
+  }
+});
+
+app.post("/assignments/delete/:id", isloggedIn, async (req, res) => {
+  try {
+    await Assignment.findByIdAndDelete(req.params.id);
+    res.redirect("/profile");
+  } catch (err) {
+    console.log("Error deleting assignment:", err);
+    res.redirect("/profile");
   }
 });
 

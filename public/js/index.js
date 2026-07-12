@@ -23,90 +23,23 @@ items.forEach((item, index) => {
   });
 });
 
-// --- LOCAL STORAGE STATE MANAGEMENT ---
-const STORAGE_KEYS = {
-  fullName: "lms_profile_fullname",
-  email: "lms_profile_email",
-  phone: "lms_profile_phone",
-  dept: "lms_profile_dept",
-  year: "lms_profile_year",
-  bio: "lms_profile_bio",
-  avatar: "lms_profile_avatar",
-  tasks: "lms_profile_tasks_data" // to save checked states
-};
-
-// Initialize profile values from localStorage or EJS server defaults
+// --- PROFILE INITIALIZATION & DISPLAY ---
 function initProfile() {
-  const savedFullName = localStorage.getItem(STORAGE_KEYS.fullName);
-  const savedEmail = localStorage.getItem(STORAGE_KEYS.email);
-  const savedPhone = localStorage.getItem(STORAGE_KEYS.phone);
-  const savedDept = localStorage.getItem(STORAGE_KEYS.dept);
-  const savedYear = localStorage.getItem(STORAGE_KEYS.year);
-  const savedBio = localStorage.getItem(STORAGE_KEYS.bio);
-  const savedAvatar = localStorage.getItem(STORAGE_KEYS.avatar);
-
-  if (savedFullName) {
-    updateNameDisplays(savedFullName);
-    document.getElementById("inputFullName").value = savedFullName;
-  }
-  if (savedEmail) {
-    document.getElementById("lblEmail").innerText = savedEmail;
-    document.getElementById("inputEmail").value = savedEmail;
-  }
-  if (savedPhone) {
-    document.getElementById("lblPhone").innerText = savedPhone;
-    document.getElementById("inputPhone").value = savedPhone;
-  }
-  if (savedDept) {
-    document.getElementById("lblDept").innerText = savedDept;
-    document.getElementById("inputDept").value = savedDept;
-  }
-  if (savedYear) {
-    document.getElementById("lblYear").innerText = savedYear;
-    document.getElementById("inputYear").value = savedYear;
-  }
-  if (savedBio) {
-    document.getElementById("inputBio").value = savedBio;
-  }
-
-  // Update dynamic subtitle under profile card
-  const dept = savedDept || "Computer Science";
-  const year = savedYear || "2nd Year";
-  document.getElementById("viewDeptAndYear").innerText = `${dept} - ${year}`;
-
-  // Load avatar if exists
-  if (savedAvatar) {
-    applyAvatarImage(savedAvatar);
-  }
-}
-
-function updateNameDisplays(name) {
-  document.getElementById("lblFullName").innerText = name;
-  document.getElementById("viewName").innerText = name;
-  
-  // Update username
-  const username = "@" + name.toLowerCase().replace(/\s+/g, '') + "123";
-  document.getElementById("lblUsername").innerText = username;
-
-  // Update header greetings
-  document.querySelectorAll(".user-greeting-name").forEach(el => {
-    if (el.tagName === "SPAN") {
-      el.innerText = name;
-    } else {
-      el.innerText = name + " Profile";
-    }
-  });
+  // Profile values are pre-rendered from the database by EJS on the server side.
 }
 
 function applyAvatarImage(base64Data) {
   const viewImg = document.getElementById("viewAvatarImg");
   const editImg = document.getElementById("editAvatarImg");
   
-  viewImg.src = base64Data;
-  viewImg.style.display = "block";
-  
-  editImg.src = base64Data;
-  editImg.style.display = "block";
+  if (viewImg) {
+    viewImg.src = base64Data;
+    viewImg.style.display = "block";
+  }
+  if (editImg) {
+    editImg.src = base64Data;
+    editImg.style.display = "block";
+  }
 
   // Hide the initial letter overlays
   document.querySelectorAll(".avatar-letter").forEach(el => {
@@ -118,7 +51,6 @@ function applyAvatarImage(base64Data) {
 const toEditBtn = document.getElementById("toEditBtn");
 const viewAccountSection = document.getElementById("viewAccountSection");
 const editAccountSection = document.getElementById("editAccountSection");
-const editProfileForm = document.getElementById("editProfileForm");
 
 if (toEditBtn) {
   toEditBtn.addEventListener("click", () => {
@@ -127,38 +59,74 @@ if (toEditBtn) {
   });
 }
 
-if (editProfileForm) {
-  editProfileForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    const newFullName = document.getElementById("inputFullName").value;
-    const newEmail = document.getElementById("inputEmail").value;
-    const newPhone = document.getElementById("inputPhone").value;
-    const newDept = document.getElementById("inputDept").value;
-    const newYear = document.getElementById("inputYear").value;
-    const newBio = document.getElementById("inputBio").value;
+// --- ASSIGNMENTS CRUD MODAL INTERACTIONS ---
+const addAssignmentButton = document.getElementById("addAssignmentButton");
+const assignmentFormModal = document.getElementById("assignmentFormModal");
+const closeAssignmentForm = document.getElementById("closeAssignmentForm");
 
-    // Save to localStorage
-    localStorage.setItem(STORAGE_KEYS.fullName, newFullName);
-    localStorage.setItem(STORAGE_KEYS.email, newEmail);
-    localStorage.setItem(STORAGE_KEYS.phone, newPhone);
-    localStorage.setItem(STORAGE_KEYS.dept, newDept);
-    localStorage.setItem(STORAGE_KEYS.year, newYear);
-    localStorage.setItem(STORAGE_KEYS.bio, newBio);
-
-    // Update displays
-    updateNameDisplays(newFullName);
-    document.getElementById("lblEmail").innerText = newEmail;
-    document.getElementById("lblPhone").innerText = newPhone;
-    document.getElementById("lblDept").innerText = newDept;
-    document.getElementById("lblYear").innerText = newYear;
-    document.getElementById("viewDeptAndYear").innerText = `${newDept} - ${newYear}`;
-
-    // Return to view mode
-    editAccountSection.style.display = "none";
-    viewAccountSection.style.display = "block";
+if (addAssignmentButton && assignmentFormModal) {
+  addAssignmentButton.addEventListener("click", () => {
+    assignmentFormModal.style.display = "flex";
   });
 }
+
+if (closeAssignmentForm && assignmentFormModal) {
+  closeAssignmentForm.addEventListener("click", () => {
+    assignmentFormModal.style.display = "none";
+  });
+}
+
+// Edit Assignment Modal
+const editAssignmentFormModal = document.getElementById("editAssignmentFormModal");
+const closeEditAssignmentForm = document.getElementById("closeEditAssignmentForm");
+
+if (closeEditAssignmentForm && editAssignmentFormModal) {
+  closeEditAssignmentForm.addEventListener("click", () => {
+    editAssignmentFormModal.style.display = "none";
+  });
+}
+
+// Event Delegation for Edit Assignment Buttons
+document.addEventListener("click", (e) => {
+  const editBtn = e.target.closest(".edit-assignment-btn");
+  if (editBtn) {
+    e.preventDefault();
+    const id = editBtn.getAttribute("data-id");
+    const title = editBtn.getAttribute("data-title");
+    const description = editBtn.getAttribute("data-description");
+    const courseId = editBtn.getAttribute("data-course");
+    const deadline = editBtn.getAttribute("data-deadline");
+    const status = editBtn.getAttribute("data-status");
+
+    const formIdInput = document.getElementById("editAssignmentId");
+    const formTitleInput = document.getElementById("editAssignmentTitle");
+    const formDescInput = document.getElementById("editAssignmentDesc");
+    const formCourseSelect = document.getElementById("editAssignmentCourse");
+    const formDeadlineInput = document.getElementById("editAssignmentDeadline");
+    const formStatusSelect = document.getElementById("editAssignmentStatus");
+
+    if (formIdInput) formIdInput.value = id || "";
+    if (formTitleInput) formTitleInput.value = title || "";
+    if (formDescInput) formDescInput.value = description || "";
+    if (formCourseSelect) formCourseSelect.value = courseId || "";
+    if (formDeadlineInput) formDeadlineInput.value = deadline || "";
+    if (formStatusSelect) formStatusSelect.value = status || "Pending";
+
+    if (editAssignmentFormModal) {
+      editAssignmentFormModal.style.display = "flex";
+    }
+  }
+});
+
+// Close modals when clicking overlay backgrounds
+window.addEventListener("click", (e) => {
+  if (e.target === assignmentFormModal) {
+    assignmentFormModal.style.display = "none";
+  }
+  if (e.target === editAssignmentFormModal) {
+    editAssignmentFormModal.style.display = "none";
+  }
+});
 
 // --- ASSIGNMENTS FILTER SYSTEM ---
 const assignmentTabContainer = document.getElementById("assignmentTabs");
@@ -300,7 +268,10 @@ function handleFile(file) {
   reader.onloadend = () => {
     const base64Data = reader.result;
     applyAvatarImage(base64Data);
-    localStorage.setItem(STORAGE_KEYS.avatar, base64Data);
+    const inputAvatar = document.getElementById("inputAvatar");
+    if (inputAvatar) {
+      inputAvatar.value = base64Data;
+    }
     uploadModal.style.display = "none";
   };
 }
